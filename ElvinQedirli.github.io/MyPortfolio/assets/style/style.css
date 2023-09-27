@@ -1,0 +1,427 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Kanit", sans-serif;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.scroll {
+  transition: all ease-in 0.3s;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  box-shadow: 0 5px 50px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes typing {
+  0% {
+    border-right: 2px solid white;
+  }
+  50% {
+    border-right: 2px solid transparent;
+  }
+  100% {
+    border-right: 2px solid white;
+  }
+}
+@keyframes neon {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228dff, 0 0 70px #228dff, 0 0 80px #228dff, 0 0 100px #228dff, 0 0 150px #228dff;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228dff, 0 0 35px #228dff, 0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
+  }
+}
+.selected::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: #228dff;
+  transition: width 0.3s;
+}
+
+body {
+  background-color: #1d1d20;
+  scroll-behavior: smooth;
+}
+body header {
+  width: 100%;
+  position: relative;
+  padding: 20px 0;
+  z-index: 100;
+  position: fixed;
+  transition: all ease 0.3s;
+}
+body header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body header .container .logo_box {
+  display: grid;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 26px;
+}
+body header .container .logo_box .logo {
+  grid-area: 1/1/-1/-1;
+  color: #cccccc;
+  transition: all ease 0.3s;
+}
+body header .container .logo_box .logo:nth-of-type(1) {
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
+}
+body header .container .logo_box .logo:nth-of-type(2) {
+  -webkit-clip-path: polygon(0% 60%, 100% 50%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 60%, 100% 50%, 100% 100%, 0% 100%);
+  color: transparent;
+  background: linear-gradient(178deg, black 51%, white 65%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  transform: translateX(-0.02em);
+}
+body header .container .logo_box .logo i {
+  padding-left: 7px;
+}
+body header .container .logo_box .logo:hover {
+  color: #fff;
+}
+body header .container .navigation_box {
+  text-align: center;
+}
+body header .container .navigation_box button {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 33px;
+  cursor: pointer;
+  color: #777777;
+  border-radius: 50%;
+  transition: scale 0.3s, animation 0.3s, box-shadow 0.3s;
+}
+body header .container .navigation_box button:hover {
+  animation: spin 2s linear infinite, neon 1.5s ease-in-out infinite alternate;
+  scale: 1.2;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+body header .container .navigation_box .active {
+  top: 89px;
+}
+body header .container .navigation_box nav {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: -260px;
+  transition: all ease-in-out 0.4s;
+  z-index: -1;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  background: #1d1d20;
+}
+body header .container .navigation_box nav ul {
+  margin: 45px 0;
+}
+body header .container .navigation_box nav ul li {
+  margin-top: 10px;
+}
+body header .container .navigation_box nav ul li a {
+  color: #cccccc;
+  font-size: 18px;
+  position: relative;
+}
+body header .container .navigation_box nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: #228dff;
+  transition: width 0.3s;
+}
+body header .container .navigation_box nav ul li a:hover::after {
+  width: 100%;
+}
+body header .container .navigation_box nav #close_btn {
+  position: absolute;
+  top: 14px;
+  right: 138px;
+  font-size: 26px;
+  color: #777777;
+  cursor: pointer;
+  transition: text-shadow 0.3s, color 0.3s;
+}
+body header .container .navigation_box nav #close_btn:hover {
+  text-shadow: 0 0 20px rgb(255, 0, 0);
+  color: red;
+}
+body .active_header {
+  background-color: #1d1d20;
+}
+body main {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+body main #home_section {
+  height: 100vh;
+  padding-top: 90px;
+  width: 100%;
+}
+body main #home_section .container {
+  display: flex;
+  gap: 30px;
+}
+body main #home_section .container .left_side {
+  max-width: 50%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+body main #home_section .container .left_side .content {
+  text-align: left;
+}
+body main #home_section .container .left_side .content h2 {
+  font-size: 30px;
+  font-weight: 300;
+  color: #ccc;
+}
+body main #home_section .container .left_side .content h1 {
+  font-size: 32px;
+  margin: 25px 0;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  color: #cccccc;
+  animation: typing 1s infinite;
+  padding-right: 3px;
+}
+body main #home_section .container .left_side .content p {
+  font-size: 18px;
+  color: #228dff;
+}
+body main #home_section .container .left_side .content #about_btn {
+  padding: 10px 30px;
+  border-radius: 30px;
+  color: #cccccc;
+  font-size: 17px;
+  border: 1px solid #228dff;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 30px;
+  transition: all ease-in-out 0.4s;
+}
+body main #home_section .container .left_side .content #about_btn i {
+  padding-left: 5px;
+}
+body main #home_section .container .left_side .content #about_btn:hover {
+  color: #fff;
+  background-color: rgba(34, 141, 255, 0.6156862745);
+  box-shadow: rgba(34, 141, 255, 0.4) 0px 5px, rgba(34, 141, 255, 0.3) 0px 10px, rgba(34, 141, 255, 0.2) 0px 15px, rgba(34, 141, 255, 0.1) 0px 20px, rgba(34, 141, 255, 0.05) 0px 25px;
+}
+body main #home_section .container .right_side {
+  max-width: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+body main #home_section .container .right_side .img_box {
+  width: 100%;
+  height: 400px;
+  background-image: url("https://cdni.iconscout.com/illustration/premium/thumb/man-coder-development-programming-computer-7944214-6310014.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+body main #home_section .container .right_side #editor {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  font-family: monospace;
+  white-space: pre-wrap;
+  color: #ccc;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  min-height: 208px;
+}
+body main #about_section {
+  height: 100vh;
+  margin: 120px 0;
+  width: 100%;
+}
+body main #about_section .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body main #about_section .container .header {
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+body main #about_section .container .header .header_text {
+  color: #cccccc;
+  font-size: 22px;
+  transition: all ease 0.3s;
+  font-weight: 400;
+}
+body main #about_section .container .about_container .about_text {
+  width: 100%;
+  padding: 20px 0;
+}
+body main #about_section .container .about_container .about_text h4 {
+  font-size: 17px;
+  color: #939393;
+  line-height: 1.6;
+  font-weight: 300;
+  word-spacing: 4px;
+  text-align: center;
+}
+body main #about_section .container .about_container .skills_box {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 235px;
+}
+body main #about_section .container .about_container .skills_box .progress_container h4 {
+  display: block;
+  padding: 5px 0;
+  color: #cccccc;
+  font-size: 20px;
+  font-weight: 400;
+}
+body main #about_section .container .about_container .skills_box .progress_container #progress_bar {
+  background: #ccc;
+  display: block;
+  height: 20px;
+  margin: 0 0 10px;
+  position: relative;
+  width: 400px;
+  border-radius: 10px;
+}
+body main #about_section .container .about_container .skills_box .progress_container #progress_bar .progress {
+  background: linear-gradient(90deg, rgb(34, 141, 255) 0%, rgb(34, 185, 255) 100%);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 0;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+}
+body main #about_section .container .about_container .button_container {
+  padding-top: 10px;
+  display: flex;
+  gap: 20px;
+}
+body main #about_section .container .about_container .button_container .hire_btn {
+  padding: 10px 30px;
+  border-radius: 30px;
+  color: #cccccc;
+  font-size: 17px;
+  border: 1px solid #228dff;
+  background-color: transparent;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 30px;
+  text-align: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  transition: all ease-in-out 0.4s;
+}
+body main #about_section .container .about_container .button_container .hire_btn i {
+  padding-left: 5px;
+}
+body main #about_section .container .about_container .button_container .hire_btn:hover {
+  color: #fff;
+  background-color: #228dff;
+  box-shadow: rgba(34, 141, 255, 0.4) 0px 5px, rgba(34, 141, 255, 0.3) 0px 10px, rgba(34, 141, 255, 0.2) 0px 15px, rgba(34, 141, 255, 0.1) 0px 20px, rgba(34, 141, 255, 0.05) 0px 25px;
+}
+body main #about_section .container .about_container .button_container .download_btn {
+  padding: 10px 30px;
+  border-radius: 30px;
+  color: #cccccc;
+  font-size: 17px;
+  border: 1px solid #228dff;
+  background-color: #228dff;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 30px;
+  text-align: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  transition: all ease-in-out 0.4s;
+}
+body main #about_section .container .about_container .button_container .download_btn i {
+  padding-left: 5px;
+}
+body main #about_section .container .about_container .button_container .download_btn:hover {
+  color: #fff;
+  background-color: transparent;
+  box-shadow: rgba(34, 141, 255, 0.4) 0px 5px, rgba(34, 141, 255, 0.3) 0px 10px, rgba(34, 141, 255, 0.2) 0px 15px, rgba(34, 141, 255, 0.1) 0px 20px, rgba(34, 141, 255, 0.05) 0px 25px;
+}
+body main #contact_section {
+  width: 100%;
+  margin-bottom: 120px;
+}
+body main #contact_section .header {
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+body main #contact_section .header .header_text {
+  color: #cccccc;
+  font-size: 22px;
+  transition: all ease 0.3s;
+  font-weight: 400;
+}
+body main #contact_section .container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+body main #contact_section .container .contact-card {
+  background-color: #cccccc;
+  color: #1d1d20;
+  cursor: pointer;
+  padding: 20px;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+body main #contact_section .container .contact-card i {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+body main #contact_section .container .contact-card h3 {
+  font-size: 18px;
+}
+body main #contact_section .container .contact-card p {
+  font-size: 14px;
+}
+body main #contact_section .container .contact-card:hover {
+  transform: translateY(-5px);
+  background-color: #228dff;
+  color: white;
+}/*# sourceMappingURL=style.css.map */
