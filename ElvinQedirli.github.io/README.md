@@ -1,1 +1,0 @@
-# ElvinQedirli.github.io
